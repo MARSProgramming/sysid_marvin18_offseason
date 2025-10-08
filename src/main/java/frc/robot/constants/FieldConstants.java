@@ -15,7 +15,7 @@ public class FieldConstants {
         return DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue) == DriverStation.Alliance.Blue;
     }
 
-    public static List<Pose2d> getAprilTagPose2dList() {
+    public static List<Pose2d> generateTagList() {
         int[] tagIntegers = new int[0];
         tagIntegers = isBlueAlliance() ? (tagIntegers = VisionFiducials.BLUE_CORAL_TAGS) : (tagIntegers = VisionFiducials.RED_CORAL_TAGS);
         List<Pose2d> tags = new ArrayList<>();
@@ -27,6 +27,13 @@ public class FieldConstants {
         return tags;
     }
 
+    public final class FieldTags {
+        private static final List<Pose2d> tagList = generateTagList();
+    }
+
+    public static List<Pose2d> getTagList() {
+        return FieldTags.tagList;
+    }
 
     public static class VisionFiducials {
         // F,B,R,L with respect to their driver stations.
@@ -65,5 +72,7 @@ public class FieldConstants {
         public static final int[] BLUE_SIDE_CLIMB_TAGS = { 14, 15 };
         public static final int[] PROCESSOR_TAGS = { 1, 15 };
     }
+
+    
 }
 
